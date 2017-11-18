@@ -43,13 +43,6 @@
 
     var sliderControl = null;
 
-    function addPopups(feature, layer) {
-      //if this statement used to check whether the feature has a property named "Location"
-      if (feature.properties && feature.properties.Location) {
-        layer.bindPopup(feature.properties.Location);
-      }
-    }
-
     var map = L.map('mapId')
     var MapURL = 'https://api.mapbox.com/styles/v1/roach202/cj6zhmvp60hdv2qn21eholv3s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9hY2gyMDIiLCJhIjoiY2o2emhrNmM1MDBrNzJxcWpvdmdncjVhYSJ9.HjiuTPR8ggkOhHhqcs_5dQ'
     var attribution = '&copy; <a href=”https://www.mapbox.com/about/maps/”>Mapbox</a> &copy; <a href=”http://www.openstreetmap.org/copyright”>OpenStreetMap</a>'
@@ -67,7 +60,22 @@
       //if this statement used to check whether the feature has a property named "coordinates"
       if (feature.properties && feature.properties.CELLSYMB)
       {
-        testlayer.bindPopup("Mining Type: " + feature.properties.CELLSYMB);
+        if (feature.properties.CELLSYMB === 1)
+        {
+          testlayer.bindPopup("Mining Type: Oil")
+        }
+        else if (feature.properties.CELLSYMB === 2)
+        {
+          testlayer.bindPopup("Mining Type: Gas")
+        }
+        else if (feature.properties.CELLSYMB === 3)
+        {
+          testlayer.bindPopup("Mining Type: Both")
+        }
+        else if (feature.properties.CELLSYMB === 4)
+        {
+          testlayer.bindPopup("Mining Type: Dry Well")
+        }
       }
     }
 

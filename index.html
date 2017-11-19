@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Oil and Gas</title>
-  <link rel="stylesheet" href="MapLayout.css"/>
+  <link rel="stylesheet" href="MapLayout.css" />
 
   <!--stylesheets-->
   <!--MAKE LEAFLET.CSS FILE LOCAL AGAIN IN ORDER FOR SOME POINTS TO SHOW-->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
-  <link rel="stylesheet" href="jquery-ui.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="jquery-ui.css" />
 
   <!--scripts-->
   <script src="leaflet.js" type="text/javascript"></script>
@@ -25,13 +25,20 @@
 
   <!--marker cluster plugin-->
   <link rel="stylesheet" href="MarkerCluster.css" />
-	<link rel="stylesheet" href="MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="MarkerCluster.Default.css" />
   <script src="leaflet.markercluster-src.js"></script>
   <script src="leaflet.markercluster.layersupport-src.js"></script>
 
   <!--slider control plugin-->
   <script src="SliderControl.js" type="text/javascript"></script>
 
+  <!--layer selection plugin-->
+  <link rel="stylesheet" href="leaflet-panel-layers.css" />
+  <link rel="stylesheet" href="icons.css" />
+  <script src="leaflet-panel-layers.js"></script>
+  
+  <!--Temp-->
+  <script src="bar.js"></script>
 
   <style>
     #mapId {
@@ -54,7 +61,13 @@
     var MapURL = 'https://api.mapbox.com/styles/v1/roach202/cj6zhmvp60hdv2qn21eholv3s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9hY2gyMDIiLCJhIjoiY2o2emhrNmM1MDBrNzJxcWpvdmdncjVhYSJ9.HjiuTPR8ggkOhHhqcs_5dQ'
     var attribution = '&copy; <a href=”https://www.mapbox.com/about/maps/”>Mapbox</a> &copy; <a href=”http://www.openstreetmap.org/copyright”>OpenStreetMap</a>'
     var MainMap = new L.TileLayer(MapURL, { minZoom: 0, maxZoom: 15, attribution: attribution });
-    MainMap.addTo(map);
+
+    //adds basemap as a layer
+    map.addLayer(MainMap);
+
+    //adds basemap to page
+    //MainMap.addTo(map);
+
     map.setView(new L.LatLng(39.754229, -98.127826), 5);
 
     var MapURL2 = 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2l3ayIsImEiOiJjajZ6aGJ2bGYyODBnMnh1aGVuMGdyOXc5In0.1WPUe4BtGuMQLegynCczeQ'
@@ -62,13 +75,68 @@
     var miniMap = new L.Control.MiniMap(MainMap2, { toggleDisplay: true }).addTo(map);
 
 
+
+    //Gets icon for name in panel
+    function iconByName(name) {
+        return '<i class="icon icon-'+name+'"></i>';
+      }
+
+    //Adds icon next to name in panel
+    function featureToMarker(feature, latlng) {
+        return L.marker(latlng, {
+          icon: L.divIcon({
+            className: 'marker-'+feature.properties.amenity,
+            html: iconByName(feature.properties.amenity),
+            iconUrl: '../images/markers/'+feature.properties.amenity+'.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          })
+        });
+      }
+      
+      //Creates overlay layer for panel
+      var overLayers = [
+      {
+          name: "Bar", //Visible name on panel
+          icon: iconByName('bar'), //Icon displayed next to name
+          layer: L.geoJson(Bar, {pointToLayer: featureToMarker })
+        }
+      ];
+
+      //Creates base layer for panel
+      var baseLayers = [
+      {
+        group: "Road Layers",
+        icon: iconByName('parking'),
+        collapsed: true,
+        layers: [
+          {
+            name: "Open Cycle Map",
+            icon: iconByName('drinking_water'),
+            layer: L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png')
+          }
+        ]
+      }
+    ];
+      
+    //Creates panelLayers (combo of base and overlay layers) to be added to map
+    var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
+       collapsibleGroups: true,
+       collapsed: true
+    });
+
+    //Adds layer control to map
+    map.addControl(panelLayers);
+
+
     //Colors each point based on CELLSYMB
     function pointToCircle(feature, LatLng) {
 
       var fillColorVar = "";
 
-      switch(true)
-      {
+      switch (true) {
 
         case (feature.properties.CELLSYMB === 1):
           fillColorVar = "#1ed817"; //Green
@@ -82,10 +150,10 @@
         case (feature.properties.CELLSYMB === 4):
           fillColorVar = "#ada7a6"; //Grey
           break;
-          
+
       }
 
-
+      //Sets features for marker
       var geojsonMarkerOptions = {
         radius: 8,
         fillColor: fillColorVar,
@@ -102,25 +170,19 @@
     }
 
     //Adds popup to each point
-    function addPopups(feature, testlayer)
-    {
+    function addPopups(feature, testlayer) {
       //Check what the CELLSYMB is and label it accordingly
-      if (feature.properties && feature.properties.CELLSYMB)
-      {
-        if (feature.properties.CELLSYMB === 1)
-        {
+      if (feature.properties && feature.properties.CELLSYMB) {
+        if (feature.properties.CELLSYMB === 1) {
           testlayer.bindPopup("Mining Type: Oil")
         }
-        else if (feature.properties.CELLSYMB === 2)
-        {
+        else if (feature.properties.CELLSYMB === 2) {
           testlayer.bindPopup("Mining Type: Gas")
         }
-        else if (feature.properties.CELLSYMB === 3)
-        {
+        else if (feature.properties.CELLSYMB === 3) {
           testlayer.bindPopup("Mining Type: Both")
         }
-        else if (feature.properties.CELLSYMB === 4)
-        {
+        else if (feature.properties.CELLSYMB === 4) {
           testlayer.bindPopup("Mining Type: Dry Well")
         }
       }
@@ -128,10 +190,9 @@
 
 
     //Fetch data from "points" GeoJSON file
-    $.getJSON("1900to1909Centroids.json", function(json) 
-    {
-        //Adds popup with mining type and color
-        var testlayer = L.geoJson(json,
+    $.getJSON("ExtractionZones/1910to1919Centroids.json", function (json) {
+      //Adds popup with mining type and color
+      var testlayer = L.geoJson(json,
         {
           onEachFeature: addPopups,
           pointToLayer: pointToCircle
@@ -150,31 +211,33 @@
 
         }
       );
-    //end
+      //end
 
 
-    // Check into MCG Layer Support!
-    // Add to map first before checking in.
-    // Adds marker cluster to map
-    L.markerClusterGroup.layerSupport().addTo(map).checkIn(testlayer);
+      // Check into MCG Layer Support!
+      // Add to map first before checking in.
+      // Adds marker cluster to map
+      L.markerClusterGroup.layerSupport().addTo(map).checkIn(testlayer);
 
-    var sliderControl = L.control.sliderControl
-    (
-      {
-            position: "topright",
-            layer: testlayer
-            //add comma after testlayer to use range (below)
-            //range: true
-      }
-    )
+      var sliderControl = L.control.sliderControl
+      (
+        {
+          position: "topright",
+          layer: testlayer
+          //add comma after testlayer to use range (below)
+          //range: true
+        }
+        )
+
+        //Adds the slider to the map
+        map.addControl(sliderControl);
         
 
-    //Adds the slider to the map
-    map.addControl(sliderControl);
+        //Initializes the slider
+        sliderControl.startSlider();
+      });
 
-    //Initializes the slider
-    sliderControl.startSlider();
-    });
+
 
   </script>
 </body>

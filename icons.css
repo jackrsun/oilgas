@@ -8,7 +8,7 @@
 
 /* ICONS */
 .icon-bar {
-	background: url('/Users/runnerdude1515/Downloads/leaflet-panel-layers-master/images/icons/bar.png') center center no-repeat;
+	background: url('Images/bar.png') center center no-repeat;
 }
 .icon-fuel {
 	background: url('../images/icons/fuel.png') center center no-repeat;
@@ -17,7 +17,7 @@
 	background: url('../images/icons/parking.png') center center no-repeat;
 }
 .icon-drinking_water {
-	background: url('/Users/runnerdude1515/Downloads/leaflet-panel-layers-master/images/icons/drinking_water.png') center center no-repeat;
+	background: url('Images/drinking_water.png') center center no-repeat;
 }
 
 /* MARKERS */

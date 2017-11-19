@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="MapLayout.css"/>
 
   <!--stylesheets-->
-  <link rel="stylesheet" href="leaflet.css"/>
+  <!--MAKE LEAFLET.CSS FILE LOCAL AGAIN IN ORDER FOR SOME POINTS TO SHOW-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
   <link rel="stylesheet" href="jquery-ui.css"/>
 
   <!--scripts-->
@@ -21,6 +22,12 @@
   <!--minimap2 plugin-->
   <link rel="stylesheet" href="Control.MiniMap2.css" />
   <script src="Control.MiniMap2.js" type="text/javascript"></script>
+
+  <!--marker cluster plugin-->
+  <link rel="stylesheet" href="MarkerCluster.css" />
+	<link rel="stylesheet" href="MarkerCluster.Default.css" />
+  <script src="leaflet.markercluster-src.js"></script>
+  <script src="leaflet.markercluster.layersupport-src.js"></script>
 
   <!--slider control plugin-->
   <script src="SliderControl.js" type="text/javascript"></script>
@@ -54,10 +61,50 @@
     var MainMap2 = new L.TileLayer(MapURL2, { minZoom: 0, maxZoom: 13 });
     var miniMap = new L.Control.MiniMap(MainMap2, { toggleDisplay: true }).addTo(map);
 
+
+    //Colors each point based on CELLSYMB
+    function pointToCircle(feature, LatLng) {
+
+      var fillColorVar = "";
+
+      switch(true)
+      {
+
+        case (feature.properties.CELLSYMB === 1):
+          fillColorVar = "#1ed817"; //Green
+          break;
+        case (feature.properties.CELLSYMB === 2):
+          fillColorVar = "#30c8f2"; //Blue
+          break;
+        case (feature.properties.CELLSYMB === 3):
+          fillColorVar = "#dd42b4"; //Purple
+          break;
+        case (feature.properties.CELLSYMB === 4):
+          fillColorVar = "#ada7a6"; //Grey
+          break;
+          
+      }
+
+
+      var geojsonMarkerOptions = {
+        radius: 8,
+        fillColor: fillColorVar,
+        color: "",
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.8
+      };
+
+      var circleMarker = L.circleMarker(LatLng, geojsonMarkerOptions);
+
+      return circleMarker;
+
+    }
+
     //Adds popup to each point
     function addPopups(feature, testlayer)
     {
-      //if this statement used to check whether the feature has a property named "coordinates"
+      //Check what the CELLSYMB is and label it accordingly
       if (feature.properties && feature.properties.CELLSYMB)
       {
         if (feature.properties.CELLSYMB === 1)
@@ -81,13 +128,16 @@
 
 
     //Fetch data from "points" GeoJSON file
-    $.getJSON("1900to1909.json", function(json) 
+    $.getJSON("1900to1909Centroids.json", function(json) 
     {
         //Adds popup with mining type and color
         var testlayer = L.geoJson(json,
         {
           onEachFeature: addPopups,
-          style: function(feature)
+          pointToLayer: pointToCircle
+
+          //Used to color polygons
+          /* style: function(feature)
           {
             switch (feature.properties.CELLSYMB)
             {
@@ -96,28 +146,34 @@
               case 3: return {color: 'yellow', weight: 1 ,fillOpacity: 0.2} //What type is 3?
               case 4: return {color: 'orange', weight: 1, fillOpacity: 0.2} //What type is 4?
             }
-          }
+          } */
+
         }
       );
-        //end
+    //end
 
-        var sliderControl = L.control.sliderControl
-        (
-          {
-                position: "topright",
-                layer: testlayer
 
-                //add comma after testlayer to use range (below)
-                //range: true
-          }
-        )
+    // Check into MCG Layer Support!
+    // Add to map first before checking in.
+    // Adds marker cluster to map
+    L.markerClusterGroup.layerSupport().addTo(map).checkIn(testlayer);
+
+    var sliderControl = L.control.sliderControl
+    (
+      {
+            position: "topright",
+            layer: testlayer
+            //add comma after testlayer to use range (below)
+            //range: true
+      }
+    )
         
 
-      //Adds the slider to the map
-      map.addControl(sliderControl);
+    //Adds the slider to the map
+    map.addControl(sliderControl);
 
-      //Initializes the slider
-      sliderControl.startSlider();
+    //Initializes the slider
+    sliderControl.startSlider();
     });
 
   </script>

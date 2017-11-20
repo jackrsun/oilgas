@@ -37,8 +37,9 @@
   <link rel="stylesheet" href="icons.css" />
   <script src="leaflet-panel-layers.js"></script>
   
-  <!--Temp-->
+  <!--Load in layers-->
   <script src="bar.js"></script>
+  <script src="Shale/Antrim.js"></script>
 
   <style>
     #mapId {
@@ -98,10 +99,18 @@
       
       //Creates overlay layer for panel
       var overLayers = [
-      {
-          name: "Bar", //Visible name on panel
-          icon: iconByName('bar'), //Icon displayed next to name
-          layer: L.geoJson(Bar, {pointToLayer: featureToMarker })
+        /* {
+            name: "Bar", //Visible name on panel
+            icon: iconByName('bar'), //Icon displayed next to name
+            layer: L.geoJson(Bar, {pointToLayer: featureToMarker })
+        }, */
+        {
+          name: "Antrim",
+          icon: iconByName('Shale'),
+          layer: L.geoJson(Antrim,
+          {
+            style: {color: "red", opacity: .5, weight: .5}
+          })
         }
       ];
 

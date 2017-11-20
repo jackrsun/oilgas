@@ -36,7 +36,7 @@ L.Control.PanelLayers = L.Control.Layers.extend({
 		autoZIndex: true,
 		collapsibleGroups: true,
 		buildItem: null,				//function that return row item html node(or html string)
-		title: '',						//title of panel
+		title: 'Selectable Features',						//title of panel
 		className: '',					//additional class name for panel
 		position: 'bottomleft'
 	},

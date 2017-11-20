@@ -154,12 +154,18 @@
     var overLayers = [
         {
           group: "Shale",
-          //name: "Antrim",
           icon: iconByName('Shale'),
           collapsed: true,
-          //layer: L.geoJson(Antrim,
           layers: [
-            {
+          {
+              name: "All_Shale",
+              icon: iconByName('Shale'),
+              layer: L.geoJson(All_Shale,
+              {
+                style: {color: "red", opacity: .5, weight: .5}
+              })
+          },
+          {
               name: "Antrim",
               icon: iconByName ('Shale'),
               layer: L.geoJson(Antrim, {
@@ -381,16 +387,7 @@
             {
               style: {color: "red", opacity: .5, weight: .5}
             })
-          },
-          {
-            name: "All_Shale",
-            icon: iconByName('Shale'),
-            layer: L.geoJson(All_Shale,
-            {
-              style: {color: "red", opacity: .5, weight: .5}
-            })
-          }
-          
+          }        
 
         ]
       }

@@ -40,6 +40,7 @@
   <!--Load in layers-->
   <script src="bar.js"></script>
   <script src="Shale/Antrim.js"></script>
+  <script src="Shale/All_Shale.js"></script>
   <script src="Shale/Appalachian1.js"></script>
   <script src="Shale/Appalachian2.js"></script>
   <script src="Shale/Atoka.js"></script>
@@ -152,7 +153,7 @@
     //Use to create a group with layers in it
     var overLayers = [
         {
-          group: "Shale Plays",
+          group: "Shale",
           //name: "Antrim",
           icon: iconByName('Shale'),
           collapsed: true,
@@ -377,6 +378,14 @@
             name: "WoodfordBarnett",
             icon: iconByName('Shale'),
             layer: L.geoJson(WoodfordBarnett,
+            {
+              style: {color: "red", opacity: .5, weight: .5}
+            })
+          },
+          {
+            name: "All_Shale",
+            icon: iconByName('Shale'),
+            layer: L.geoJson(All_Shale,
             {
               style: {color: "red", opacity: .5, weight: .5}
             })

@@ -41,6 +41,8 @@
   <script src="bar.js"></script>
   <script src="Shale/Antrim.js"></script>
   <script src="Shale/Appalachian1.js"></script>
+  <script src="Shale/Appalachian2.js"></script>
+  <script src="Shale/Atoka.js"></script>
 
   <style>
     #mapId {
@@ -98,30 +100,74 @@
         });
       }
       
-      //Creates overlay layer for panel
-      var overLayers = [
-        /* {
-            name: "Bar", //Visible name on panel
-            icon: iconByName('bar'), //Icon displayed next to name
-            layer: L.geoJson(Bar, {pointToLayer: featureToMarker })
-        }, */
+      //Use for individual layers only
+      /* var overLayers = [
+      {
+          name: "Bar", //Visible name on panel
+          icon: iconByName('bar'), //Icon displayed next to name
+          layer: L.geoJson(Bar, {pointToLayer: featureToMarker })
+      },
+      {
+        name: "Antrim",
+        icon: iconByName('Shale'),
+        layer: L.geoJson(Antrim,
         {
-          name: "Antrim",
-          icon: iconByName('Shale'),
-          layer: L.geoJson(Antrim,
-          {
-            style: {color: "red", opacity: .5, weight: .5}
-          })
-        },
+          style: {color: "red", opacity: .5, weight: .5}
+        })
+      },
+      {
+        name: "Appalachian1",
+        icon: iconByName('Shale'),
+        layer: L.geoJson(Appalachian1,
         {
-          name: "Appalachian1",
+          style: {color: "red", opacity: .5, weight: .5}
+        })
+      }
+    ]; */
+
+    //Use to create a group with layers in it
+    var overLayers = [
+        {
+          group: "Shale Plays",
+          //name: "Antrim",
           icon: iconByName('Shale'),
-          layer: L.geoJson(Appalachian1,
+          //layer: L.geoJson(Antrim,
+          layers: [
+            {
+              name: "Antrim",
+              icon: iconByName ('Shale'),
+              layer: L.geoJson(Antrim, {
+              style: {color: "red", opacity: .5, weight: .5}
+            })
+          },
           {
-            style: {color: "red", opacity: .5, weight: .5}
-          })
-        }
-      ];
+            name: "Appalachian1",
+            icon: iconByName('Shale'),
+            layer: L.geoJson(Appalachian1,
+            {
+              style: {color: "red", opacity: .5, weight: .5}
+            })
+          },
+          {
+            name: "Appalachian2",
+            icon: iconByName('Shale'),
+            layer: L.geoJson(Appalachian2,
+            {
+              style: {color: "red", opacity: .5, weight: .5}
+            })
+          },
+          {
+            name: "Atoka",
+            icon: iconByName('Shale'),
+            layer: L.geoJson(Atoka,
+            {
+              style: {color: "red", opacity: .5, weight: .5}
+            })
+          }
+
+        ]
+      }
+    ];
 
       //Creates base layer for panel
       var baseLayers = [
@@ -208,7 +254,7 @@
 
 
     //Fetch data from "points" GeoJSON file
-    $.getJSON("ExtractionZones/1910to1919Centroids.json", function (json) {
+    $.getJSON("ExtractionZones/1900to1909Centroids.json", function (json) {
       //Adds popup with mining type and color
       var testlayer = L.geoJson(json,
         {

@@ -1,0 +1,33 @@
+var overLayers = [
+        /* {
+            name: "Bar", //Visible name on panel
+            icon: iconByName('bar'), //Icon displayed next to name
+            layer: L.geoJson(Bar, {pointToLayer: featureToMarker })
+        }, */
+        {
+          group: "Shale Plays",
+          //name: "Antrim",
+          icon: iconByName('Shale'),
+          //layer: L.geoJson(Antrim,
+          layers: [
+            {
+              name: "Antrim",
+              icon: iconByName ('Shale'),
+              active: true,
+              layer: L.geoJson(Antrim, {
+              style: {color: "red", opacity: .5, weight: .5}
+            })
+          },
+          {
+            name: "Appalachian1",
+            icon: iconByName('Shale'),
+            layer: L.geoJson(Appalachian1,
+            {
+              style: {color: "red", opacity: .5, weight: .5}
+            })
+          }
+
+
+        ]
+        }
+      ];

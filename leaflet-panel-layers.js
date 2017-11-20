@@ -34,7 +34,7 @@ L.Control.PanelLayers = L.Control.Layers.extend({
 		compact: true,
 		collapsed: false,
 		autoZIndex: true,
-		collapsibleGroups: false,
+		collapsibleGroups: true,
 		buildItem: null,				//function that return row item html node(or html string)
 		title: '',						//title of panel
 		className: '',					//additional class name for panel
@@ -420,9 +420,11 @@ L.Control.PanelLayers = L.Control.Layers.extend({
 		h = h || this._map.getSize().y;
 
 		if (this.options.compact)
-			this._form.style.maxHeight = h + 'px';
+			//this._form.style.maxHeight = h + 'px';
+			this._form.style.maxHeight = '500px';
 		else
-			this._form.style.height = h + 'px';
+			//this._form.style.height = h + 'px';
+			this._form.style.height = h + '500px';
 	},
 
 	_expand: function () {

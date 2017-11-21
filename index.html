@@ -30,6 +30,7 @@
   <script src="leaflet.markercluster.layersupport-src.js"></script>
 
   <!--slider control plugin-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script> <!--Touch Support-->
   <script src="SliderControl.js" type="text/javascript"></script>
 
   <!--layer selection plugin-->
@@ -174,6 +175,7 @@
           {
               name: "All_Shale",
               icon: iconByName('Shale'),
+              onEachFeature: addPopups2,
               layer: L.geoJson(All_Shale,
               {
                 style: {color: "red", opacity: .5, weight: .5}
@@ -410,7 +412,7 @@
       //Creates base layer for panel
       var baseLayers = [
       {
-        group: "Road Layers",
+        group: "Test",
         icon: iconByName('parking'),
         collapsed: true,
         layers: [
@@ -487,6 +489,15 @@
         else if (feature.properties.CELLSYMB === 4) {
           testlayer.bindPopup("Mining Type: Dry Well")
         }
+      }
+    }
+
+    //Adds popup to each point
+    function addPopups2(feature, overLayers) {
+      //Check what the CELLSYMB is and label it accordingly
+      if (feature.properties && feature.properties.PROV_NAME) 
+      {
+        overLayers.bindPopup(PROV_NAME)
       }
     }
 

@@ -1,5 +1,34 @@
+body {
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
 #mapId {
     position:relative;
     height: 100%;
     width: 100%;
   }
+
+.my-custom-control {
+  padding:5px 10px;
+  background: rgba(67, 68, 66, 0.336);
+  position: relative;
+  margin: 0 auto;
+  right: 115%;
+  width: 400px;
+  clear: left;
+  height: auto;
+  z-index: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 11px;
+  line-height: 18px;
+  border-radius: 5px;
+}
+
+.my-custom-control:empty {
+  display: hidden;
+}

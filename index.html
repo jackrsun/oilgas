@@ -71,35 +71,42 @@
   <script src="Shale/WoodfordBarnett.js"></script>
 
   <style>
-    #mapId {
+    /* #mapId {
       position: relative;
       width: 100%;
       height: 100%;
     }
 
-    body  {background-color: black;}
-    h3    {background-color: black;
-            color: white;}
-    p     {background-color: black;
-            color: white;}
+    body {
+      background-color: rgba(0, 0, 0, 0);
+    }
+    h3 {
+      color: green;
+      background-color: rgba(0, 0, 0, 0);
+    }
+    p {
+      color: green;
+      background-color: rgba(0, 0, 0, 0);
+    } */
 
   </style>
 </head>
 
 <body>
 
-  <h3 style="text-align:center;:">
-    Oil and Gas Extraction Points From BLANK to BLANK 
-  </h3>
-  <p style="text-align:center;:",>
+  <!-- <h3 style="text-align:center;">
+    Oil and Gas Extraction Points From BLANK to BLANK
+  </h3> -->
+  <!-- <p style="text-align:center;",>
     Drag the time-slider to update the time frame, and select shale rock overlays 
-   </p>
+   </p> -->
 
   <div id="mapId"></div>
 
   <script type="text/javascript">
 
     var sliderControl = null;
+    var i = 0;
 
     var map = L.map('mapId')
     var MapURL = 'https://api.mapbox.com/styles/v1/roach202/cj6zhmvp60hdv2qn21eholv3s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9hY2gyMDIiLCJhIjoiY2o2emhrNmM1MDBrNzJxcWpvdmdncjVhYSJ9.HjiuTPR8ggkOhHhqcs_5dQ'
@@ -113,6 +120,51 @@
     //MainMap.addTo(map);
 
     map.setView(new L.LatLng(39.754229, -98.127826), 5);
+
+
+
+    //Add overlay text to map
+    var MyCustomControl = L.Control.extend({
+      options: {
+          // Default control position --- check MapLayout.css
+          //position: 'topleft'
+      },
+      onAdd: function (map) {
+          // Create a container with classname and return it
+          return L.DomUtil.create('div', 'my-custom-control');
+      },
+      setContent: function (content) {
+          // Set the innerHTML of the container
+          this.getContainer().innerHTML = content;
+      }
+    });
+  
+    // Assign to a variable so you can use it later and add it to your map
+    var myCustomControl =  new MyCustomControl().addTo(map);
+
+    // Set content on a marker click
+    map.on('click', function () {
+
+      if (i % 2 == 0)
+      {
+        myCustomControl.setContent('Oil and Gas Extraction Points From BLANK to BLANK. ' + 
+        'Drag the time-slider to update the time frame, and select shale rock overlays ');
+      }
+      else
+      {
+        myCustomControl.setContent('');
+      }
+
+      i++;
+      
+    });
+
+    /* // Remove content on map click   //*****FIX******
+    map.on('mouseover', function () {
+      myCustomControl.setContent('hello there');
+    }); */
+
+
 
     var MapURL2 = 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2l3ayIsImEiOiJjajZ6aGJ2bGYyODBnMnh1aGVuMGdyOXc5In0.1WPUe4BtGuMQLegynCczeQ'
     var MainMap2 = new L.TileLayer(MapURL2, { minZoom: 0, maxZoom: 13 });

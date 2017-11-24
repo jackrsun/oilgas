@@ -106,7 +106,8 @@
   <script type="text/javascript">
 
     var sliderControl = null;
-    var i = 0;
+    var headCnt = 0;
+    var footCnt = 0;
 
     var map = L.map('mapId')
     var MapURL = 'https://api.mapbox.com/styles/v1/roach202/cj6zhmvp60hdv2qn21eholv3s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9hY2gyMDIiLCJhIjoiY2o2emhrNmM1MDBrNzJxcWpvdmdncjVhYSJ9.HjiuTPR8ggkOhHhqcs_5dQ'
@@ -124,14 +125,14 @@
 
 
     //Add overlay text to map
-    var MyCustomControl = L.Control.extend({
+    var MyCustomControlHeader = L.Control.extend({
       options: {
           // Default control position --- check MapLayout.css
           //position: 'topleft'
       },
       onAdd: function (map) {
           // Create a container with classname and return it
-          return L.DomUtil.create('div', 'my-custom-control');
+          return L.DomUtil.create('div', 'my-custom-control-header');
       },
       setContent: function (content) {
           // Set the innerHTML of the container
@@ -140,36 +141,69 @@
     });
   
     // Assign to a variable so you can use it later and add it to your map
-    var myCustomControl =  new MyCustomControl().addTo(map);
+    var myCustomControlHeader =  new MyCustomControlHeader().addTo(map);
 
     // Set content on a marker click
     map.on('click', function () {
 
-      if (i % 2 == 0)
+      if (headCnt % 2 == 0 && headCnt < 2)
       {
-        myCustomControl.setContent('Oil and Gas Extraction Points From BLANK to BLANK. ' + 
+        myCustomControlHeader.setContent('Oil and Gas Extraction Points From BLANK to BLANK. ' + 
         'Drag the time-slider to update the time frame, and select shale rock overlays ');
       }
       else
       {
-        myCustomControl.setContent('');
+        myCustomControlHeader.setContent('');
       }
 
-      i++;
+      headCnt++;
       
     });
 
-    /* // Remove content on map click   //*****FIX******
-    map.on('mouseover', function () {
-      myCustomControl.setContent('hello there');
-    }); */
+
+
+
+    //Add overlay text to map
+    var MyCustomControlFooter = L.Control.extend({
+      options: {
+          // Default control position --- check MapLayout.css
+          position: 'bottomleft'
+      },
+      onAdd: function (map) {
+          // Create a container with classname and return it
+          return L.DomUtil.create('div', 'my-custom-control-footer');
+      },
+      setContent: function (content) {
+          // Set the innerHTML of the container
+          this.getContainer().innerHTML = content;
+      }
+    });
+  
+    // Assign to a variable so you can use it later and add it to your map
+    var myCustomControlFooter =  new MyCustomControlFooter().addTo(map);
+
+    // Set content on a marker click
+    map.on('click', function () {
+
+      if (footCnt % 2 == 0 && footCnt < 2)
+      {
+        myCustomControlFooter.setContent('Developed at The Ohio State University by Kyle Phillips, Joey Roach, and Nick Tocicki');
+      }
+      else
+      {
+        myCustomControlFooter.setContent('');
+      }
+
+      footCnt++;
+      
+    });
+
 
 
 
     var MapURL2 = 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2l3ayIsImEiOiJjajZ6aGJ2bGYyODBnMnh1aGVuMGdyOXc5In0.1WPUe4BtGuMQLegynCczeQ'
     var MainMap2 = new L.TileLayer(MapURL2, { minZoom: 0, maxZoom: 13 });
     var miniMap = new L.Control.MiniMap(MainMap2, { toggleDisplay: true }).addTo(map);
-
 
 
     //Gets icon for name in panel
@@ -227,7 +261,6 @@
           {
               name: "All_Shale",
               icon: iconByName('Shale'),
-              onEachFeature: addPopups2,
               layer: L.geoJson(All_Shale,
               {
                 style: {color: "red", opacity: .5, weight: .5}
@@ -236,6 +269,7 @@
           {
               name: "Antrim",
               icon: iconByName ('Shale'),
+              onEachFeature: addPopups2,
               layer: L.geoJson(Antrim, {
               style: {color: "red", opacity: .5, weight: .5}
             })
@@ -455,7 +489,7 @@
             {
               style: {color: "red", opacity: .5, weight: .5}
             })
-          }        
+          }     
 
         ]
       }
@@ -545,11 +579,11 @@
     }
 
     //Adds popup to each point
-    function addPopups2(feature, overLayers) {
+    function addPopups2(feature, panelLayers) {
       //Check what the CELLSYMB is and label it accordingly
-      if (feature.properties && feature.properties.PROV_NAME) 
+      if (feature.properties && feature.properties.name) 
       {
-        overLayers.bindPopup(PROV_NAME)
+        panelLayers.bindPopup(name)
       }
     }
 

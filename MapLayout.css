@@ -12,14 +12,34 @@ html {
     width: 100%;
   }
 
-.my-custom-control {
+.my-custom-control-header {
   padding:5px 10px;
-  background: rgba(67, 68, 66, 0.336);
-  position: relative;
+  background: rgba(67, 68, 66, .75);
+  position: 'relative';
   margin: 0 auto;
   right: 115%;
   width: 400px;
-  clear: left;
+  clear: both;
+  height: auto;
+  z-index: 0;
+  text-align: center; 
+  color: #fff;
+  font-size: 11px;
+  line-height: 18px;
+  border-radius: 5px;
+}
+
+.my-custom-control-header:empty {
+  display: hidden;
+}
+
+.my-custom-control-footer {
+  padding:5px 10px;
+  background: rgba(67, 68, 66, .75);
+  margin: 0 auto;
+  left: 115%;
+  width: 400px;
+  clear: both;
   height: auto;
   z-index: 0;
   text-align: center;
@@ -29,6 +49,6 @@ html {
   border-radius: 5px;
 }
 
-.my-custom-control:empty {
+.my-custom-control-footer:empty {
   display: hidden;
 }

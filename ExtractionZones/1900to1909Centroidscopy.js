@@ -1,4 +1,4 @@
-var a = {
+var Centroids1 = {
     "type": "FeatureCollection",
     "crs": {
         "type": "name",

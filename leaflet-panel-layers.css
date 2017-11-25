@@ -10,8 +10,9 @@
 	margin: 0;
 }
 .leaflet-panel-layers {
-	width: 30px;
-	min-width: 30px;
+	width: 35px; /* Sets width of individual layers after mouseout */
+	min-width: 35px;
+	overflow: hidden; /* Sets overflow of panels after mouseout */
 }
 .leaflet-panel-layers.expanded {	
 	width: auto;
@@ -52,7 +53,7 @@
 	float: left;
 }
 .leaflet-panel-layers-group.collapsible:not(.expanded) {
-    height: 20px;
+	height: 20px;
 }
 .leaflet-panel-layers-group.collapsible:not(.expanded) .leaflet-panel-layers-grouplabel {
 	height: 20px;
@@ -126,10 +127,10 @@
 	border-top:1px solid rgba(0,0,0,0.3);
 }
 .leaflet-panel-layers-item {
-	min-height: 20px;	
+	min-height: 20px;
 }
 .leaflet-panel-layers-margin {
-    height: 25px;
+	height: 25px;
 }
 .leaflet-panel-layers-icon {
 	line-height: 20px;

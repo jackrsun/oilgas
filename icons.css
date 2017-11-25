@@ -1,7 +1,7 @@
 .icon {
 	display: inline-block;
 	margin: 2px;
-	height: 16px;
+	height: 18px;
 	width: 16px;
 	background-color: #ccc;
 }
@@ -21,6 +21,9 @@
 }
 .icon-shale {
 	background: url('Images/Pickaxes.png') center center no-repeat;
+}
+.icon-layers {
+	background: url('Images/layers.png') center center no-repeat;
 }
 
 /* MARKERS */

@@ -259,7 +259,7 @@
           collapsed: true,
           layers: [
           {
-              name: "All_Shale",
+              name: "All Shale",
               icon: iconByName('Shale'),
               layer: L.geoJson(All_Shale,
               {
@@ -504,14 +504,19 @@
         layers: [
           {
             name: "Style 1",
-            icon: iconByName('drinking_water'),
+            icon: iconByName('layers'),
             //layer: L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png')
             layer: L.tileLayer('https://api.mapbox.com/styles/v1/sicparvismagna/cja8p7ldd0sd42roawa50m3uo/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ljcGFydmlzbWFnbmEiLCJhIjoiY2o3NDhmMms1MDIzaTJxbXRkZHdrNG5qdSJ9.p8mYSdkRDqWf3dR4x-QqpQ')
           },
           {
             name: "Style 2",
-            icon: iconByName('drinking_water'),
+            icon: iconByName('layers'),
             layer: L.tileLayer('https://api.mapbox.com/styles/v1/sicparvismagna/cjaeqlvib6eds2rpa48stly8w/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ljcGFydmlzbWFnbmEiLCJhIjoiY2o3NDhmMms1MDIzaTJxbXRkZHdrNG5qdSJ9.p8mYSdkRDqWf3dR4x-QqpQ')
+          },
+          {
+            name: "Original",
+            icon: iconByName('layers'),
+            layer: L.tileLayer('https://api.mapbox.com/styles/v1/roach202/cj6zhmvp60hdv2qn21eholv3s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoicm9hY2gyMDIiLCJhIjoiY2o2emhrNmM1MDBrNzJxcWpvdmdncjVhYSJ9.HjiuTPR8ggkOhHhqcs_5dQ')
           }
         ]
       }

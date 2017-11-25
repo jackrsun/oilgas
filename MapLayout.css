@@ -7,13 +7,13 @@ html {
 }
 
 #mapId {
-    position:relative;
+    position: relative;
     height: 100%;
     width: 100%;
   }
 
 .my-custom-control-header {
-  padding:5px 10px;
+  padding: 5px 10px;
   background: rgba(67, 68, 66, .75);
   position: 'relative';
   margin: 0 auto;
@@ -34,10 +34,10 @@ html {
 }
 
 .my-custom-control-footer {
-  padding:5px 10px;
+  padding: 5px 10px;
   background: rgba(67, 68, 66, .75);
   margin: 0 auto;
-  left: 115%;
+  right: -115%;
   width: 400px;
   clear: both;
   height: auto;

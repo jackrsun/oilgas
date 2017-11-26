@@ -12,19 +12,23 @@ html {
     width: 100%;
   }
 
+
+/* Header and Footer styles */
 .my-custom-control-header {
   padding: 5px 10px;
   background: rgba(67, 68, 66, .75);
   position: 'relative';
   margin: 0 auto;
-  right: 115%;
-  width: 400px;
+  /* right: 115%;
+  width: 400px; */
+  right: 38%;
+  width: 800px;
   clear: both;
   height: auto;
   z-index: 0;
   text-align: center; 
   color: #fff;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 18px;
   border-radius: 5px;
 }
@@ -44,11 +48,58 @@ html {
   z-index: 0;
   text-align: center;
   color: #fff;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 18px;
   border-radius: 5px;
 }
 
 .my-custom-control-footer:empty {
   display: hidden;
+}
+
+
+/* Custom corners */
+.leaflet-verticalcenter {
+  position: absolute;
+  top: 50%; /* possible because the placeholder's parent is the map */
+  /* transform: translateY(-50%); */ /* using the CSS3 Transform technique */
+  padding-top: 10px;
+}
+
+.leaflet-verticalcenter .leaflet-control {
+  margin-bottom: 10px;
+}
+
+.leaflet-verticaltop {
+  position: absolute;
+  top: 0%; /* possible because the placeholder's parent is the map */
+  /* transform: translateY(-50%); */ /* using the CSS3 Transform technique */
+  padding-top: 10px;
+}
+
+.leaflet-verticaltop .leaflet-control {
+  margin-bottom: 10px;
+}
+
+.leaflet-verticaltop2 {
+  position: absolute;
+  top: 0%;
+  left: 3%;
+  /* transform: translateY(-50%); */ /* using the CSS3 Transform technique */
+  padding-top: 1px;
+}
+
+.leaflet-verticaltop .leaflet-control {
+  margin-bottom: 10px;
+}
+
+.leaflet-verticalbottom {
+  position: absolute;
+  bottom: 0%; /* possible because the placeholder's parent is the map */
+  /* transform: translateY(-50%); */ /* using the CSS3 Transform technique */
+  padding-top: 10px;
+}
+
+.leaflet-verticalbottom .leaflet-control {
+  margin-bottom: 10px;
 }

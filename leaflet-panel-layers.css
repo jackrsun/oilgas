@@ -1,4 +1,3 @@
-
 /* PANEL LAYERS */
 .leaflet-panel-layers .leaflet-panel-layers-list {
 	display: block;
@@ -25,7 +24,7 @@
 .leaflet-panel-layers:not(.expanded) .leaflet-panel-layers-title > span,
 .leaflet-panel-layers:not(.expanded) .leaflet-panel-layers-selector,
 .leaflet-panel-layers:not(.expanded) .leaflet-panel-layers-grouplabel {
-    display: none;
+	display: none;
 }
 .leaflet-panel-layers-separator {
 	clear: both;

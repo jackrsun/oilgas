@@ -409,7 +409,7 @@ L.Control.PanelLayers = L.Control.Layers.extend({
 
 		if (this.options.title) {
 			var titlabel = L.DomUtil.create('label', this.className + '-title');
-			titlabel.innerHTML = '<span>' + this.options.title + '</span>';
+			titlabel.innerHTML = '<span style="font-weight:bold;font-size: 16px;">' + this.options.title + '</span>';
 			container.appendChild(titlabel);
 		}
 

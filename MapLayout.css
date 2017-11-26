@@ -12,7 +12,6 @@ html {
     width: 100%;
   }
 
-
 /* Header and Footer styles */
 .my-custom-control-header {
   padding: 5px 10px;
@@ -56,6 +55,7 @@ html {
 .my-custom-control-footer:empty {
   display: hidden;
 }
+/*------------------------------------------------*/
 
 
 /* Custom corners */
@@ -81,14 +81,14 @@ html {
   margin-bottom: 10px;
 }
 
-.leaflet-verticaltop2 {
+.leaflet-verticalleft {
   position: absolute;
   top: 0%;
   left: 3%;
   padding-top: 1px;
 }
 
-.leaflet-verticaltop .leaflet-control {
+.leaflet-verticalleft .leaflet-control {
   margin-bottom: 10px;
 }
 

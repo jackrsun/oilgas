@@ -167,8 +167,6 @@
     });
 
 
-
-
     //Add overlay text to map
     var MyCustomControlFooter = L.Control.extend({
       options: {
@@ -191,7 +189,7 @@
     // Set content on a marker click
     map.on('click', function () {
 
-      if (footCnt % 2 == 0 && footCnt < 2)
+      if (footCnt % 2 == 0 && footCnt < 4)
       {
         myCustomControlFooter.setContent('Developed at The Ohio State University by Kyle Phillips, Joey Roach, and Nick Tocicki');
       }
@@ -509,13 +507,13 @@
         collapsed: true,
         layers: [
           {
-            name: "Style 1",
+            name: "Terrain",
             icon: iconByName('layers'),
             //layer: L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png')
             layer: L.tileLayer('https://api.mapbox.com/styles/v1/sicparvismagna/cja8p7ldd0sd42roawa50m3uo/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ljcGFydmlzbWFnbmEiLCJhIjoiY2o3NDhmMms1MDIzaTJxbXRkZHdrNG5qdSJ9.p8mYSdkRDqWf3dR4x-QqpQ')
           },
           {
-            name: "Style 2",
+            name: "Satellite",
             icon: iconByName('layers'),
             layer: L.tileLayer('https://api.mapbox.com/styles/v1/sicparvismagna/cjaeqlvib6eds2rpa48stly8w/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ljcGFydmlzbWFnbmEiLCJhIjoiY2o3NDhmMms1MDIzaTJxbXRkZHdrNG5qdSJ9.p8mYSdkRDqWf3dR4x-QqpQ')
           },

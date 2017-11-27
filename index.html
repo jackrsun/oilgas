@@ -203,8 +203,6 @@
     });
 
 
-
-
     var MapURL2 = 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2l3ayIsImEiOiJjajZ6aGJ2bGYyODBnMnh1aGVuMGdyOXc5In0.1WPUe4BtGuMQLegynCczeQ'
     var MainMap2 = new L.TileLayer(MapURL2, { minZoom: 0, maxZoom: 13 });
     var miniMap = new L.Control.MiniMap(MainMap2, { toggleDisplay: true }).addTo(map);
@@ -502,7 +500,7 @@
       //Creates base layer for panel
       var baseLayers = [
       {
-        group: "Test",
+        group: "Map Styles",
         icon: iconByName('parking'),
         collapsed: true,
         layers: [
@@ -528,8 +526,8 @@
       
     //Creates panelLayers (combo of base and overlay layers) to be added to map
     var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
-       collapsibleGroups: true,
-       collapsed: true
+      collapsibleGroups: true,
+      collapsed: true
     });
 
     //Adds layer control to map
@@ -648,6 +646,38 @@
         //Initializes the slider
         sliderControl.startSlider();
       });
+
+      function getColor(n) {
+          return n > 4 ? 'blue' :
+                  n > 3 ? '#FD8D3C' :
+                    n = 2 ? 'green' :
+                      n > 1 ? '#FED976' :
+                        '#FFEDA0';
+        }
+
+        var legend = L.control({position: 'bottomright'});
+        
+          legend.onAdd = function (map) {
+        
+            var div = L.DomUtil.create('div', 'info legend'),
+              miningType = [1, 2, 3, 4],
+              labels = ['gas', 'oil', 'both', 'dry well'],
+              at, here;
+        
+            for (var i = 0; i < miningType.length; i++) {
+              at = miningType[i];
+              here = labels[i];
+        
+              labels.push(
+                '<i style="background:' + getColor(at) + '"></i> ' +
+                here);
+            }
+        
+            div.innerHTML = labels.join('<br>');
+            return div;
+          };
+        
+          legend.addTo(map);
 
 
 

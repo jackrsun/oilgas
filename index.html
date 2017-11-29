@@ -155,13 +155,13 @@
 
       if (headCnt % 2 == 0 && headCnt < 4)
       {
-        myCustomControlHeader.setContent('Oil and Gas Extraction Points From BLANK to BLANK. ' + 
+        myCustomControlHeader.setContent('Oil and Gas Extraction Points From 1900 to 1909. ' + 
         'Drag the time-slider to update the time frame, and select shale rock overlays ');
       }
       else
       {
        // myCustomControlHeader.setContent(''); //FIX
-        myCustomControlHeader.setContent('Oil and Gas Extraction Points From BLANK to BLANK. ' + 
+        myCustomControlHeader.setContent('Oil and Gas Extraction Points From 1900 to 1909. ' + 
         'Drag the time-slider to update the time frame, and select shale rock overlays ');
       }
 
@@ -670,8 +670,7 @@
             categories = ['oil', 'gas', 'both', 'dry well'];
         
             for (var i = 0; i < grades.length; i++) {
-              div.innerHTML +=      
-              labels.push(
+               div.innerHTML += labels.push(
                 '<i class = "circle" style="background:' + getColor(grades[i]) + '"></i> ' +
                 (categories[i]+ '<br>'));
             }

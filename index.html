@@ -160,7 +160,9 @@
       }
       else
       {
-        myCustomControlHeader.setContent('');
+       // myCustomControlHeader.setContent(''); //FIX
+        myCustomControlHeader.setContent('Oil and Gas Extraction Points From BLANK to BLANK. ' + 
+        'Drag the time-slider to update the time frame, and select shale rock overlays ');
       }
 
       headCnt++;
@@ -196,7 +198,8 @@
       }
       else
       {
-        myCustomControlFooter.setContent('');
+        //myCustomControlFooter.setContent(''); //FIX
+        myCustomControlFooter.setContent('Developed at The Ohio State University by Kyle Phillips, Joey Roach, and Nick Tocicki')
       }
 
       footCnt++;
@@ -576,8 +579,8 @@
     //Adds popup to each point
     function addPopups(feature, testlayer) {
       //Check what the CELLSYMB is and label it accordingly
-      if (feature.properties && feature.properties.CELLSYMB) {
-        if (feature.properties.CELLSYMB === 1) {
+      if (feature.properties && feature.geometry) {
+        /* if (feature.properties.CELLSYMB === 1) {
           testlayer.bindPopup("Mining Type: Oil")
         }
         else if (feature.properties.CELLSYMB === 2) {
@@ -588,7 +591,9 @@
         }
         else if (feature.properties.CELLSYMB === 4) {
           testlayer.bindPopup("Mining Type: Dry Well")
-        }
+        } */
+
+        testlayer.bindPopup(feature.geometry["coordinates"] + "")
       }
     }
 
@@ -597,7 +602,7 @@
       //Check what the CELLSYMB is and label it accordingly
       if (feature.properties && feature.properties.name) 
       {
-        panelLayers.bindPopup(name)
+        panelLayers.bindPopup(feature.properties["name"] + "")
       }
     }
 
@@ -662,7 +667,7 @@
             var div = L.DomUtil.create('div', 'info legend'),
             grades = [1, 2, 3, 4],
             labels = ['Production Types'],
-            categories = ['gas', 'oil', 'both', 'dry well'];
+            categories = ['oil', 'gas', 'both', 'dry well'];
         
             for (var i = 0; i < grades.length; i++) {
               div.innerHTML +=      

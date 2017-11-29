@@ -648,29 +648,26 @@
       });
 
       function getColor(n) {
-          return n > 4 ? 'blue' :
-                  n > 3 ? '#FD8D3C' :
-                    n = 2 ? 'green' :
-                      n > 1 ? '#FED976' :
-                        '#FFEDA0';
+          return n == 4 ? "#ada7a6" :
+                 n == 3 ? "#dd42b4" :
+                 n == 2 ? "#30c8f2" :
+                 n == 1 ? "#1ed817" :
+                          '#FFEDA0';
         }
 
         var legend = L.control({position: 'bottomright'});
-        
-          legend.onAdd = function (map) {
+            legend.onAdd = function (map) {
         
             var div = L.DomUtil.create('div', 'info legend'),
-              miningType = [1, 2, 3, 4],
-              labels = ['gas', 'oil', 'both', 'dry well'],
-              at, here;
+            grades = [1, 2, 3, 4],
+            labels = ['Production Types'],
+            categories = ['gas', 'oil', 'both', 'dry well'];
         
             for (var i = 0; i < miningType.length; i++) {
-              at = miningType[i];
-              here = labels[i];
-        
+              div.innerHTML +=      
               labels.push(
-                '<i style="background:' + getColor(at) + '"></i> ' +
-                here);
+                '<i style="background:' + getColor(grades[i]) + '"></i> ' +
+                (categories[i]+ '<br>'));
             }
         
             div.innerHTML = labels.join('<br>');

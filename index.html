@@ -70,6 +70,8 @@
   <script src="Shale/Woodford2.js"></script>
   <script src="Shale/Woodford3.js"></script>
   <script src="Shale/WoodfordBarnett.js"></script>
+  <script src="ExtractionZones/1900to1909Centroidscopy.js"></script>
+  <script src="ExtractionZones/1990to1999Centroidscopy.js"></script>
 
   <style>
 
@@ -496,7 +498,21 @@
               style: {color: "red", opacity: .5, weight: .5}
             })
           }     
-
+        ]
+      },
+      {
+        group: "Extraction Zones",
+        layers: [
+          {
+            name: "1900to1909",
+            icon: iconByName('Shale'),
+            layer: L.geoJson(Centroids1,
+            {
+              style: {color: "red", opacity: .5, weight: .5},
+              onEachFeature: addPopups,
+              pointToLayer: pointToCircle
+            })
+          }
         ]
       }
     ];

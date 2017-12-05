@@ -259,26 +259,54 @@
       }
     ]; */
 
+    
     //Use to create a group with layers in it
     var overLayers = [
-        {
-          group: "Shale",
-          icon: iconByName('Shale'),
-          collapsed: false,
-          layers: [
+    {
+        group: "Extraction Zones",
+        layers: [
           {
-              name: "All Shale",
-              icon: iconByName('Shale'),
-              layer: L.geoJson(All_Shale,
-              {
-                style: {color: "red", opacity: .5, weight: .5}
-              })
+            name: "1900to1909",
+            icon: iconByName('oil'),
+            zindex: 1,
+            layer: L.geoJson(Centroids1,
+            {
+              style: {opacity: .5, weight: .5, position: 'relative', zindex: 999},
+              onEachFeature: addPopups,
+              pointToLayer: pointToCircle,
+            })
           },
           {
-              name: "Antrim",
-              icon: iconByName ('Shale'),
-              onEachFeature: addPopups2,
-              layer: L.geoJson(Antrim, {
+            name: "1910to1919",
+            icon: iconByName('oil'),
+            layer: L.geoJson(Centroids1,
+            {
+              style: {opacity: .5, weight: .5},
+              onEachFeature: addPopups,
+              pointToLayer: pointToCircle,
+            })
+          }
+        ]
+      }, //group 1 end
+      {
+          group: "Shale",
+          icon: iconByName('Shale'),
+          collapsed: true,
+          layers: [
+          {
+            name: "All Shale",
+            icon: iconByName('Shale'),
+            layer: L.geoJson(All_Shale,
+            {
+              style: {color: "red", opacity: .5, weight: .5}
+            })
+          },
+          {
+            name: "Antrim",
+            icon: iconByName ('Shale'),
+            onEachFeature: addPopups2,
+            layer: L.geoJson(Antrim, 
+            {
               style: {color: "red", opacity: .5, weight: .5}
             })
           },
@@ -499,22 +527,7 @@
             })
           }     
         ]
-      },
-      {
-        group: "Extraction Zones",
-        layers: [
-          {
-            name: "1900to1909",
-            icon: iconByName('oil'),
-            layer: L.geoJson(Centroids1,
-            {
-              style: {color: "red", opacity: .5, weight: .5},
-              onEachFeature: addPopups,
-              pointToLayer: pointToCircle
-            })
-          }
-        ]
-      }
+      }   //Group 2 end
     ];
 
       //Creates base layer for panel
@@ -652,6 +665,8 @@
       // Add to map first before checking in.
       // Adds marker cluster to map
       L.markerClusterGroup.layerSupport().addTo(map).checkIn(testlayer);
+     
+
       
 
       var sliderControl = L.control.sliderControl

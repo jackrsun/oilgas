@@ -186,13 +186,25 @@ L.Control.PanelLayers = L.Control.Layers.extend({
 
 		checked = this._map.hasLayer(obj.layer);
 
-		if (obj.overlay) {
-			input = L.DomUtil.create('input', this.className + '-selector');
-			input.type = 'checkbox';
-			input.defaultChecked = checked;
-			//TODO name
-		} else
+		if (obj.overlay) 
+		{
+			if (obj.name === "1900to1909")
+			{
+				//console.log("hi there");
+				input = this._createRadioElement('leaflet-oil-layers', checked, obj);
+			}
+			else
+			{
+				input = L.DomUtil.create('input', this.className + '-selector');
+				input.type = 'checkbox';
+				input.defaultChecked = checked;
+				//TODO name
+			}
+		}
+		else
+		{
 			input = this._createRadioElement('leaflet-base-layers', checked, obj);
+		}
 
 		input.value = obj.id;
 		input.layerId = obj.id;

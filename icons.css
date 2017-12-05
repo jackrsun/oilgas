@@ -25,6 +25,9 @@
 .icon-layers {
 	background: url('Images/layers.png') center center no-repeat;
 }
+.icon-oil {
+	background: url('Images/oil.png') center center no-repeat;
+}
 
 /* MARKERS */
 .leaflet-marker-icon {

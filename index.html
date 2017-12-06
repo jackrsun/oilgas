@@ -71,8 +71,9 @@
   <script src="Shale/Woodford3.js"></script>
   <script src="Shale/WoodfordBarnett.js"></script>
   <script src="ExtractionZones/1900to1909Centroidscopy.js"></script>
+  <script src="ExtractionZones/1910to1919Centroids.js"></script>  
   <script src="ExtractionZones/1990to1999Centroidscopy.js"></script>
-
+  
   <style>
 
   </style>
@@ -271,7 +272,7 @@
             zindex: 1,
             layer: L.geoJson(Centroids1,
             {
-              style: {opacity: .5, weight: .5, position: 'relative', zindex: 999},
+              style: {opacity: .5, weight: .5, position: 'relative'},
               onEachFeature: addPopups,
               pointToLayer: pointToCircle,
             })
@@ -279,7 +280,17 @@
           {
             name: "1910to1919",
             icon: iconByName('oil'),
-            layer: L.geoJson(Centroids1,
+            layer: L.geoJson(Centroids2,
+            {
+              style: {opacity: .5, weight: .5},
+              onEachFeature: addPopups,
+              pointToLayer: pointToCircle,
+            })
+          },
+          {
+            name: "1990to1999",
+            icon: iconByName('oil'),
+            layer: L.geoJson(Centroids9,
             {
               style: {opacity: .5, weight: .5},
               onEachFeature: addPopups,

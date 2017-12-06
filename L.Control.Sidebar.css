@@ -78,7 +78,7 @@
       .leaflet-sidebar.left.visible ~ .leaflet-left {
         left: 460px; }
       .leaflet-sidebar.right.visible ~ .leaflet-right {
-        right: 460px; } }
+        right: 0px; } }
   .leaflet-sidebar .close {
     position: absolute;
     right: 20px;

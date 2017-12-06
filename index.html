@@ -234,32 +234,7 @@
           })
         });
       }
-      
-      //Use for individual layers only
-      /* var overLayers = [
-      {
-          name: "Bar", //Visible name on panel
-          icon: iconByName('bar'), //Icon displayed next to name
-          layer: L.geoJson(Bar, {pointToLayer: featureToMarker })
-      },
-      {
-        name: "Antrim",
-        icon: iconByName('Shale'),
-        layer: L.geoJson(Antrim,
-        {
-          style: {color: "red", opacity: .5, weight: .5}
-        })
-      },
-      {
-        name: "Appalachian1",
-        icon: iconByName('Shale'),
-        layer: L.geoJson(Appalachian1,
-        {
-          style: {color: "red", opacity: .5, weight: .5}
-        })
-      }
-    ]; */
-
+    
     
     //Use to create a group with layers in it
     var overLayers = [
@@ -272,9 +247,9 @@
             zindex: 1,
             layer: L.geoJson(Centroids1,
             {
-              style: {opacity: .5, weight: .5, position: 'relative'},
+              style: {opacity: .5, weight: .5},
               onEachFeature: addPopups,
-              pointToLayer: pointToCircle,
+              pointToLayer: pointToCircle
             })
           },
           {
@@ -675,8 +650,11 @@
       // Check into MCG Layer Support!
       // Add to map first before checking in.
       // Adds marker cluster to map
-      L.markerClusterGroup.layerSupport().addTo(map).checkIn(testlayer);
-     
+      //L.markerClusterGroup.layerSupport().addTo(map).checkIn(testlayer);
+
+      var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport();
+
+      mcgLayerSupportGroup.addTo(map).checkIn(overLayers);
 
       
 
@@ -690,10 +668,10 @@
         )
 
         //Adds the slider to the map
-        map.addControl(sliderControl);        
+        //map.addControl(sliderControl);        
 
         //Initializes the slider
-        sliderControl.startSlider();
+        //sliderControl.startSlider();
       });
 
       function getColor(n) {

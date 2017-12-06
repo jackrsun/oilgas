@@ -712,7 +712,10 @@
             closeButton: true,
             position: 'right'
     });
-
+    map.addControl(sidebar);
+    setTimeout(function () {
+            sidebar.show();
+    }, 500);
     var marker = L.marker([51.2, 7]).addTo(map).on('click', function () {
             sidebar.toggle();
     });

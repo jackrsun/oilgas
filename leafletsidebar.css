@@ -80,13 +80,13 @@
 
 .leaflet-control {
 	position: relative;
-	z-index: 799999;
-	pointer-events: auto;
+	z-index: 79999;
+	pointer-events: none;
 	}
 .leaflet-top,
 .leaflet-bottom {
 	position: absolute;
-	z-index: 1000;
+	z-index: 9999;
 	pointer-events: none;
 	}
 .leaflet-top {
@@ -299,7 +299,7 @@
 	position: relative;
 	}
 .leaflet-control-layers-expanded {
-	padding: 6px 10px 6px 6px;
+	padding: 0px 0px 0px 0px;
 	color: #333;
 	background: #fff;
 	}
@@ -384,7 +384,7 @@
 /* popup */
 
 .leaflet-popup {
-	position: relative;
+	position: absolute;
 	text-align: center;
 	}
 .leaflet-popup-content-wrapper {

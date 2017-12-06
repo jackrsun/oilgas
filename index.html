@@ -38,6 +38,11 @@
   <link rel="stylesheet" href="leaflet-panel-layers.css" />
   <link rel="stylesheet" href="icons.css" />
   <script src="leaflet-panel-layers.js"></script>
+
+  <!--Calling Sideboar-->
+  <link rel="stylesheet" href="leafletsidebar.css" />
+  <link rel="stylesheet" href="L.Control.Sidebar.css" />
+  <script src="L.Control.Sidebar.js"></script>
   
   <!--Load in layers-->
   <script src="bar.js"></script>
@@ -84,6 +89,7 @@
 <body>
 
   <div id="mapId"></div>
+  <div id="sidebar"></div>
 
   <script type="text/javascript">
 
@@ -729,6 +735,37 @@
         
         legend.addTo(map);
 
+    var sidebar = L.control.sidebar('sidebar', {
+            closeButton: true,
+            position: 'right'
+    });
+    map.addControl(sidebar);
+    setTimeout(function () {
+            sidebar.show();
+    }, 500);
+    var marker = L.marker([51.2, 7]).addTo(map).on('click', function () {
+            sidebar.toggle();
+    });
+    map.on('click', function () {
+            sidebar.hide();
+    })
+    sidebar.on('show', function () {
+            console.log('Sidebar will be visible.');
+    });
+    sidebar.on('shown', function () {
+            console.log('Sidebar is visible.');
+    });
+    sidebar.on('hide', function () {
+            console.log('Sidebar will be hidden.');
+    });
+    sidebar.on('hidden', function () {
+            console.log('Sidebar is hidden.');
+    });
+    L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
+            console.log('Close button clicked.');
+    });
+    sidebar.setContent(
+      'Department of Geography / Geog 5201 / Morteza<br> Joey Roach, Nick Tocicki, Kyle Phillips');
 
 
   </script>

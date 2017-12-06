@@ -188,7 +188,7 @@ L.Control.PanelLayers = L.Control.Layers.extend({
 
 		if (obj.overlay) 
 		{
-			if (obj.name === "1900to1909" || obj.name === "1910to1919" || obj.name === "1990to1999")
+			if (obj.name === "1900to1909" || obj.name === "1910to1919" || obj.name === "1920to1929" || obj.name === "1930to1939" || obj.name === "1990to1999")
 			{
 				//console.log("hi there");
 				input = this._createRadioElement('leaflet-oil-layers', checked, obj);

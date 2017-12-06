@@ -79,6 +79,7 @@
   <script src="ExtractionZones/1910to1919Centroids.js"></script>
   <script src="ExtractionZones/1920to1929Centroids.js"></script>
   <script src="ExtractionZones/1930to1939Centroids.js"></script>
+  <script src="ExtractionZones/1940to1949Centroids.js"></script>
   <script src="ExtractionZones/1990to1999Centroidscopy.js"></script>
   
   <style>
@@ -284,6 +285,16 @@
             name: "1930to1939",
             icon: iconByName('oil'),
             layer: L.geoJson(Centroids4,
+            {
+              style: {opacity: .5, weight: .5},
+              onEachFeature: addPopups,
+              pointToLayer: pointToCircle,
+            })
+          },
+          {
+            name: "1940to1949",
+            icon: iconByName('oil'),
+            layer: L.geoJson(Centroids5,
             {
               style: {opacity: .5, weight: .5},
               onEachFeature: addPopups,
@@ -543,8 +554,6 @@
         ]
       } */   //Group 2 end
     ];
-
-    //mcgLayerSupportGroup.addTo(map);
 
 
       //Creates base layer for panel

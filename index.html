@@ -76,7 +76,9 @@
   <script src="Shale/Woodford3.js"></script>
   <script src="Shale/WoodfordBarnett.js"></script>
   <script src="ExtractionZones/1900to1909Centroidscopy.js"></script>
-  <script src="ExtractionZones/1910to1919Centroids.js"></script>  
+  <script src="ExtractionZones/1910to1919Centroids.js"></script>
+  <script src="ExtractionZones/1920to1929Centroids.js"></script>
+  <script src="ExtractionZones/1930to1939Centroids.js"></script>
   <script src="ExtractionZones/1990to1999Centroidscopy.js"></script>
   
   <style>
@@ -262,6 +264,26 @@
             name: "1910to1919",
             icon: iconByName('oil'),
             layer: L.geoJson(Centroids2,
+            {
+              style: {opacity: .5, weight: .5},
+              onEachFeature: addPopups,
+              pointToLayer: pointToCircle,
+            })
+          },
+          {
+            name: "1920to1929",
+            icon: iconByName('oil'),
+            layer: L.geoJson(Centroids3,
+            {
+              style: {opacity: .5, weight: .5},
+              onEachFeature: addPopups,
+              pointToLayer: pointToCircle,
+            })
+          },
+          {
+            name: "1930to1939",
+            icon: iconByName('oil'),
+            layer: L.geoJson(Centroids4,
             {
               style: {opacity: .5, weight: .5},
               onEachFeature: addPopups,
@@ -554,10 +576,11 @@
       collapsibleGroups: true,
       collapsed: true
     });
+    
 
     //Adds layer control to map
     map.addControl(panelLayers);
-
+    
 
     //Colors each point based on CELLSYMB
     function pointToCircle(feature, LatLng) {
@@ -641,7 +664,7 @@
           {
             switch (feature.properties.CELLSYMB)
             {
-              case 1: return {color: "green", weight: 1, fillOpacity: 0.2} //What type is 1?
+              case 1: return {color: 'green', weight: 1, fillOpacity: 0.2} //What type is 1?
               case 2: return {color: 'blue', weight: 1, fillOpacity: 0.2} //What type is 2?
               case 3: return {color: 'yellow', weight: 1 ,fillOpacity: 0.2} //What type is 3?
               case 4: return {color: 'orange', weight: 1, fillOpacity: 0.2} //What type is 4?
@@ -658,9 +681,8 @@
       // Adds marker cluster to map
       //L.markerClusterGroup.layerSupport().addTo(map).checkIn(testlayer);
 
-      var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport();
-
-      mcgLayerSupportGroup.addTo(map).checkIn(overLayers);
+      /* var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport();
+      mcgLayerSupportGroup.addTo(map).checkIn(testlayer); */
 
       
 
@@ -688,27 +710,32 @@
                           '#FFEDA0';
         }
 
-        var legend = L.control({position: 'bottomright'});
-            legend.onAdd = function (map) {
-        
-            var div = L.DomUtil.create('div', 'info legend'),
-            grades = [1, 2, 3, 4],
-            labels = ['Production Types'],
-            categories = ['oil', 'gas', 'both', 'dry well'];
-        
-            for (var i = 0; i < grades.length; i++) {
-               div.innerHTML += labels.push(
-                '<i class = "circle" style="background:' + getColor(grades[i]) + '"></i> ' +
-                (categories[i]+ '<br>'));
-            }
-        
-            div.innerHTML = labels.join('<br>');
-            return div;
-          };
-        
-          legend.addTo(map);
+        var legend = L.control(
+          {
+            position: 'bottomright'
+          });
 
-    var sidebar = L.control.sidebar('sidebar', {
+        legend.onAdd = function (map) {
+        
+        var div = L.DomUtil.create('div', 'info legend'),
+          grades = [1, 2, 3, 4],
+          labels = ['Production Types'],
+          categories = ['oil', 'gas', 'both', 'dry well'];
+        
+        for (var i = 0; i < grades.length; i++) 
+        {
+          div.innerHTML += labels.push(
+          '<i class = "circle" style="background:' + getColor(grades[i]) + '"></i> ' +
+          (categories[i]+ '<br>'));
+        }
+        
+          div.innerHTML = labels.join('<br>');
+          return div;
+        };
+        
+        legend.addTo(map);
+
+        var sidebar = L.control.sidebar('sidebar', {
             closeButton: true,
             position: 'right'
     });

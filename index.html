@@ -144,9 +144,9 @@
 
     //Add overlay text to map
     var MyCustomControlHeader = L.Control.extend({
-      options: {
-          // Default control position --- check MapLayout.css
-          //position: 'topleft'
+      options: {  
+        // Default control position --- check MapLayout.css
+          //position: 
       },
       onAdd: function (map) {
           // Create a container with classname and return it
@@ -166,14 +166,14 @@
 
       if (headCnt % 2 == 0 && headCnt < 4)
       {
-        myCustomControlHeader.setContent('Oil and Gas Extraction Points From 1900 to 1909. ' + 
-        'Drag the time-slider to update the time frame, and select shale rock overlays ');
+        myCustomControlHeader.setContent('Oil and Gas Extraction Points From 1900 to 1950. ' + 
+        '<br> Use check box in bottom left to select data from time frames as well as select shale rock overlays ');
       }
       else
       {
        // myCustomControlHeader.setContent(''); //FIX
-        myCustomControlHeader.setContent('Oil and Gas Extraction Points From 1900 to 1909. ' + 
-        'Drag the time-slider to update the time frame, and select shale rock overlays ');
+        myCustomControlHeader.setContent('Oil and Gas Extraction Points From 1900 to 1950. ' + 
+        '<br> Use check box in bottom left to select data from time frames as well as select shale rock overlays ');
       }
 
       headCnt++;
@@ -182,40 +182,40 @@
 
 
     //Add overlay text to map
-    var MyCustomControlFooter = L.Control.extend({
-      options: {
+   // var MyCustomControlFooter = L.Control.extend({
+    // options: {
           // Default control position --- check MapLayout.css
-          position: 'bottomleft'
-      },
-      onAdd: function (map) {
-          // Create a container with classname and return it
-          return L.DomUtil.create('div', 'my-custom-control-footer');
-      },
-      setContent: function (content) {
+    //      position: 'bottomleft'
+     // },
+    //  onAdd: function (map) {
+    //      // Create a container with classname and return it
+    //      return L.DomUtil.create('div', 'my-custom-control-footer');
+    //  },
+    //  setContent: function (content) {
           // Set the innerHTML of the container
-          this.getContainer().innerHTML = content;
-      }
-    });
+     //     this.getContainer().innerHTML = content;
+     // }
+    //});
   
     // Assign to a variable so you can use it later and add it to your map
-    var myCustomControlFooter =  new MyCustomControlFooter().addTo(map);
+    // var myCustomControlFooter =  new MyCustomControlFooter().addTo(map);
 
     // Set content on a marker click
-    map.on('click', function () {
+  //  map.on('click', function () {
 
-      if (footCnt % 2 == 0 && footCnt < 4)
-      {
-        myCustomControlFooter.setContent('Developed at The Ohio State University by Kyle Phillips, Joey Roach, and Nick Tocicki');
-      }
-      else
-      {
+  //    if (footCnt % 2 == 0 && footCnt < 4)
+  //    {
+  //      myCustomControlFooter.setContent('Developed at The Ohio State University by Kyle Phillips, Joey Roach, and Nick Tocicki');
+  //    }
+  //    else
+  //    {
         //myCustomControlFooter.setContent(''); //FIX
-        myCustomControlFooter.setContent('Developed at The Ohio State University by Kyle Phillips, Joey Roach, and Nick Tocicki')
-      }
+  //      myCustomControlFooter.setContent('Developed at The Ohio State University by Kyle Phillips, Joey Roach, and Nick Tocicki')
+  //    }
 
-      footCnt++;
+  //    footCnt++;
       
-    });
+  //  });
 
 
     var MapURL2 = 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2l3ayIsImEiOiJjajZ6aGJ2bGYyODBnMnh1aGVuMGdyOXc5In0.1WPUe4BtGuMQLegynCczeQ'

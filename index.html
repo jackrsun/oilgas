@@ -81,6 +81,7 @@
   <script src="ExtractionZones/1930to1939Centroids.js"></script>
   <script src="ExtractionZones/1940to1949Centroids.js"></script>
   <script src="ExtractionZones/1990to1999Centroidscopy.js"></script>
+  <script src="points.js"></script>
   
   <style>
 
@@ -158,6 +159,7 @@
           this.getContainer().innerHTML = content;
       }
     });
+    
   
     // Assign to a variable so you can use it later and add it to your map
     var myCustomControlHeader =  new MyCustomControlHeader().addTo(map);
@@ -202,7 +204,7 @@
     // var myCustomControlFooter =  new MyCustomControlFooter().addTo(map);
 
     // Set content on a marker click
-  //  map.on('click', function () {
+    //  map.on('click', function () {
 
   //    if (footCnt % 2 == 0 && footCnt < 4)
   //    {
@@ -312,7 +314,7 @@
             })
           }
         ]
-      }/* , //group 1 end
+      }, //group 1 end
       {
           group: "Shale",
           icon: iconByName('Shale'),
@@ -552,7 +554,7 @@
             })
           }     
         ]
-      } */   //Group 2 end
+      }   //Group 2 end
     ];
 
 
@@ -588,37 +590,9 @@
       collapsibleGroups: true,
       collapsed: true
     });
-    
 
     //Adds layer control to map
     map.addControl(panelLayers);
-
-    // var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport(),
-    // group1 = L.layerGroup(),
-    // group2 = L.layerGroup(),
-    // group3 = L.layerGroup(),
-    // group4 = L.layerGroup(),
-    // control = L.control.layers(null, null, { collapsed: false }),
-    // i, a, title, marker;
-    // mcgLayerSupportGroup.addTo(map);
-    // for (i = 0; i < fullCount; i++) {
-    // a = addressPoints[i];
-    // title = a[2];
-    // marker = L.marker([a[0], a[1]], { title: title });
-    // marker.bindPopup(title);
-    // marker.addTo(i < quarterCount ? group1 : i < quarterCount * 2 ? group2 : i < quarterCount * 3 ? group3 : group4);
-    // }
-    // mcgLayerSupportGroup.checkIn([group1, group2, group3, group4]);
-    // control.addOverlay(group1, 'First quarter');
-    // control.addOverlay(group2, 'Second quarter');
-    // control.addOverlay(group3, 'Third quarter');
-    // control.addOverlay(group4, 'Fourth quarter');
-    // control.addTo(map);
-    // group1.addTo(map); // Adding to map or to AutoMCG are now equivalent.
-    // group2.addTo(map);
-    // group3.addTo(map);
-    // group4.addTo(map);
-
     
 
     //Colors each point based on CELLSYMB
@@ -638,7 +612,8 @@
           fillColorVar = "#dd42b4"; //Purple
           break;
         case (feature.properties.CELLSYMB === 4):
-          fillColorVar = "#ada7a6"; //Grey
+          fillColorVar = "#ada7a6";
+          zindex: 0; //Grey
           break;
 
       }
@@ -718,6 +693,7 @@
       // Check into MCG Layer Support!
       // Add to map first before checking in.
       // Adds marker cluster to map
+
       //L.markerClusterGroup.layerSupport().addTo(map).checkIn(testlayer);
 
       /* var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport();
@@ -741,44 +717,49 @@
         //sliderControl.startSlider();
       });
 
-      function getColor(n) {
+      //Legend Controls
+      function getColor(n) 
+      {
           return n == 4 ? "#ada7a6" :
                  n == 3 ? "#dd42b4" :
                  n == 2 ? "#30c8f2" :
                  n == 1 ? "#1ed817" :
                           '#FFEDA0';
-        }
+      }
 
-        var legend = L.control(
-          {
-            position: 'bottomright'
-          });
+      var legend = L.control(
+      {
+        position: 'bottomright'
+      });
 
-        legend.onAdd = function (map) {
-        
-        var div = L.DomUtil.create('div', 'info legend'),
-          grades = [1, 2, 3, 4],
-          labels = ['Production Types'],
-          categories = ['oil', 'gas', 'both', 'dry well'];
-        
-        for (var i = 0; i < grades.length; i++) 
-        {
-          div.innerHTML += labels.push(
-          '<i class = "circle" style="background:' + getColor(grades[i]) + '"></i> ' +
-          (categories[i]+ '<br>'));
-        }
-        
-          div.innerHTML = labels.join('<br>');
-          return div;
-        };
-        
-        legend.addTo(map);
+      legend.onAdd = function (map) {
+      
+      var div = L.DomUtil.create('div', 'info legend'),
+        grades = [1, 2, 3, 4],
+        labels = ['Production Types'],
+        categories = ['oil', 'gas', 'both', 'dry well'];
+      
+      for (var i = 0; i < grades.length; i++) 
+      {
+        div.innerHTML += labels.push(
+        '<i class = "circle" style="background:' + getColor(grades[i]) + '"></i> ' +
+        (categories[i]+ '<br>'));
+      }
+      
+        div.innerHTML = labels.join('<br>');
+        return div;
+      };
+      
+      legend.addTo(map);
 
     var sidebar = L.control.sidebar('sidebar', {
             closeButton: true,
             position: 'right'
     });
+
+    //Sidebar controls
     map.addControl(sidebar);
+
     setTimeout(function () {
             sidebar.show();
     }, 500);
@@ -806,11 +787,11 @@
     sidebar.setContent(
       'The Ohio State University, Department of Geography' +
       '<br> 2017 / Geog 5201 / Prof. Morteza' + 
-      '<br> Joey Roach, Roach.202@osu.edu,' +
-      '<br> Nick Tocicki, Tocicki.2@osu.edu,' +
-      '<br> Kyle Phillips, Phillips.1636@osu.edu.' +
+      '<br> Joey Roach: Roach.202@osu.edu,' +
+      '<br> Nick Tocicki: Tocicki.2@osu.edu,' +
+      '<br> Kyle Phillips: Phillips.1636@osu.edu.' +
       '<br> ' +
-      '<br> Link to youtube link'
+      '<br> Link to youtube link + <a href=”http://www.google.com”>Link to youtube link</a>' 
     );
 
 

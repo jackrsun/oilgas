@@ -15,7 +15,7 @@ html {
 /* Header and Footer styles */
 .my-custom-control-header {
   padding: 5px 10px;
-  background: rgba(67, 68, 66, .75);
+  background: rgba(67, 68, 66, .8);
   position: 'relative';
   margin: 0 auto;
   /* right: 115%;
@@ -27,7 +27,7 @@ html {
   z-index: 0;
   text-align: center; 
   color: #fff;
-  font-size: 14px;
+  font-size: 13.5px;
   line-height: 18px;
   border-radius: 5px;
 }

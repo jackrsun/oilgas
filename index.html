@@ -739,9 +739,16 @@
     setTimeout(function () {
             sidebar.show();
     }, 500);
-    var marker = L.marker([51.2, 7]).addTo(map).on('click', function () {
-            sidebar.toggle();
-    });
+
+    // var marker = L.marker([51.2, 7]).addTo(map).on('click', function () {
+    //         sidebar.toggle();
+    // });
+
+    // map.on('dblclick', function ()
+    // {
+    //     sidebar.toggle();
+    // });
+
     map.on('click', function () {
             sidebar.hide();
     })
@@ -767,7 +774,7 @@
       '<br> <b> Kyle Phillips: </b> Phillips.1636@osu.edu' +
       '<br> <br> <u> The Ohio State University, Department of Geography </u>' +
       '<br> <i> 2017 / Geog 5201 / Prof. Morteza </i>' + 
-      '<br> <br> <a href="http://youtube.com">Youtube Tutorial</a>' +
+      '<br> <br> <center> <a href="http://youtube.com">Youtube Tutorial</a> </center>' +
       '<br> ');
 
 

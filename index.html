@@ -586,37 +586,37 @@
     function pointToCircle(feature, LatLng) {
 
       var fillColorVar = "";
-      var opacity = "";
+      var opacity2 = "";
 
       switch (true) {
 
         case (feature.properties.CELLSYMB === 1):
           fillColorVar = "#1ed817"; //Green
-          opacity = .8
+          opacity2 = .8
           break;
         case (feature.properties.CELLSYMB === 2):
           fillColorVar = "#30c8f2"; //Blue
-          opacity = .8
+          opacity2 = .8
           break;
         case (feature.properties.CELLSYMB === 3):
           fillColorVar = "#dd42b4"; //Purple
-          opacity = .8
+          opacity2 = .8
           break;
         case (feature.properties.CELLSYMB === 4):
           fillColorVar = "#ada7a6"; //Grey
-          opacity = .2
+          opacity2 = .4
           break;
 
       }
 
       //Sets features for marker
       var geojsonMarkerOptions = {
-        radius: 2,
+        radius: 3,
         fillColor: fillColorVar,
         color: "",
         weight: 2,
         opacity: 1,
-        fillOpacity: opacity
+        fillOpacity: opacity2
       };
 
       var circleMarker = L.circleMarker(LatLng, geojsonMarkerOptions);
@@ -761,12 +761,13 @@
             console.log('Close button clicked.');
     });
     sidebar.setContent(
-      'The Ohio State University, Department of Geography' +
-      '<br> 2017 / Geog 5201 / Prof. Morteza' + 
-      '<br> Joey Roach: Roach.202@osu.edu,' +
-      '<br> Nick Tocicki: Tocicki.2@osu.edu,' +
-      '<br> Kyle Phillips: Phillips.1636@osu.edu.' +
-      '<br> <a href="http://youtube.com">Visit Youtube</a>' +
+      '<i> Developed by: </i>' + 
+      '<br> <b> Joey Roach: </b> Roach.202@osu.edu' +
+      '<br> <b> Nick Tocicki: </b> Tocicki.2@osu.edu' +
+      '<br> <b> Kyle Phillips: </b> Phillips.1636@osu.edu' +
+      '<br> <br> <u> The Ohio State University, Department of Geography </u>' +
+      '<br> <i> 2017 / Geog 5201 / Prof. Morteza </i>' + 
+      '<br> <br> <a href="http://youtube.com">Youtube Tutorial</a>' +
       '<br> ');
 
 

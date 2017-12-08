@@ -5,7 +5,7 @@ L.Control.Sidebar = L.Control.extend({
     options: {
         closeButton: true,
         position: 'left',
-        autoPan: false,
+        autoPan: false, //moves map
     },
 
     initialize: function (placeholder, options) {
